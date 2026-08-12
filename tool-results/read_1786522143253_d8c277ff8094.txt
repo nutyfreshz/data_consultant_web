@@ -1,0 +1,652 @@
+     1→<!DOCTYPE html>
+     2→<html lang="en">
+     3→<head>
+     4→  <meta charset="UTF-8" />
+     5→  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     6→  <title>Nutchapong L. (Kendo) — Data & AI Stack Solutions Consultant</title>
+     7→  <meta name="description" content="Data & AI Stack Solutions Consultant | Analytics Engineer. Bridging executive business strategy and modern AI/Data engineering." />
+     8→  <script src="https://cdn.tailwindcss.com"></script>
+     9→  <link rel="preconnect" href="https://fonts.googleapis.com" />
+    10→  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    11→  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    12→  <script>
+    13→    tailwind.config = {
+    14→      theme: {
+    15→        extend: {
+    16→          colors: {
+    17→            main: '#0F172A',
+    18→            surface: '#1E293B',
+    19→            edge: '#334155',
+    20→            emerald: '#10B981',
+    21→            cyan: '#06B6D4',
+    22→            primary: '#F8FAFC',
+    23→            muted: '#94A3B8',
+    24→          },
+    25→          fontFamily: {
+    26→            mono: ['"JetBrains Mono"', '"Fira Code"', 'ui-monospace', 'monospace'],
+    27→            sans: ['Inter', 'system-ui', 'sans-serif'],
+    28→          },
+    29→          maxWidth: { content: '1120px' },
+    30→        },
+    31→      },
+    32→    };
+    33→  </script>
+    34→  <style>
+    35→    html { scroll-behavior: smooth; }
+    36→    body {
+    37→      font-family: Inter, system-ui, sans-serif;
+    38→      background: #0F172A;
+    39→      color: #F8FAFC;
+    40→    }
+    41→    .font-mono { font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace; }
+    42→
+    43→    .status-dot {
+    44→      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55);
+    45→      animation: status-pulse 2.2s ease-out infinite;
+    46→    }
+    47→    @keyframes status-pulse {
+    48→      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55); }
+    49→      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+    50→      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    51→    }
+    52→
+    53→    .cursor-blink::after {
+    54→      content: '▋';
+    55→      margin-left: 2px;
+    56→      color: #10B981;
+    57→      animation: blink 1s step-end infinite;
+    58→    }
+    59→    @keyframes blink { 50% { opacity: 0; } }
+    60→
+    61→    .card-hover {
+    62→      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    63→    }
+    64→    .card-hover:hover {
+    65→      border-color: #10B981;
+    66→      background-color: #243044;
+    67→      transform: translateY(-3px) scale(1.02);
+    68→      box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+    69→    }
+    70→
+    71→    .metric-card {
+    72→      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    73→    }
+    74→    .metric-card:hover {
+    75→      border-color: #06B6D4;
+    76→      background-color: #243044;
+    77→      transform: translateY(-3px) scale(1.02);
+    78→      box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+    79→    }
+    80→
+    81→    .btn-primary {
+    82→      border: 1px solid #10B981;
+    83→      color: #10B981;
+    84→      background: transparent;
+    85→      transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+    86→    }
+    87→    .btn-primary:hover {
+    88→      background: #10B981;
+    89→      color: #0F172A;
+    90→      box-shadow: 0 0 18px rgba(16, 185, 129, 0.35);
+    91→    }
+    92→    .btn-primary:focus-visible {
+    93→      outline: 2px solid #06B6D4;
+    94→      outline-offset: 3px;
+    95→    }
+    96→
+    97→    .btn-secondary {
+    98→      border: 1px solid #334155;
+    99→      color: #F8FAFC;
+   100→      background: transparent;
+   101→      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+   102→    }
+   103→    .btn-secondary:hover {
+   104→      border-color: #06B6D4;
+   105→      background: #1E293B;
+   106→      box-shadow: 0 0 12px rgba(6, 182, 212, 0.15);
+   107→    }
+   108→    .btn-secondary:focus-visible {
+   109→      outline: 2px solid #06B6D4;
+   110→      outline-offset: 3px;
+   111→    }
+   112→
+   113→    .nav-link {
+   114→      color: #94A3B8;
+   115→      transition: color 0.15s;
+   116→    }
+   117→    .nav-link:hover { color: #F8FAFC; }
+   118→    .nav-link:focus-visible {
+   119→      outline: 2px solid #06B6D4;
+   120→      outline-offset: 3px;
+   121→      border-radius: 2px;
+   122→    }
+   123→
+   124→    .step-num {
+   125→      box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.35), 0 0 20px rgba(16, 185, 129, 0.1);
+   126→    }
+   127→
+   128→    .copy-ok {
+   129→      color: #10B981 !important;
+   130→      border-color: #10B981 !important;
+   131→    }
+   132→
+   133→    .fade-up {
+   134→      opacity: 0;
+   135→      transform: translateY(28px);
+   136→      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+   137→      will-change: opacity, transform;
+   138→    }
+   139→    .fade-up.is-visible {
+   140→      opacity: 1;
+   141→      transform: translateY(0);
+   142→    }
+   143→    .fade-up[data-delay="1"] { transition-delay: 0.08s; }
+   144→    .fade-up[data-delay="2"] { transition-delay: 0.16s; }
+   145→    .fade-up[data-delay="3"] { transition-delay: 0.24s; }
+   146→    .fade-up[data-delay="4"] { transition-delay: 0.32s; }
+   147→
+   148→    .term-line {
+   149→      opacity: 0;
+   150→      transform: translateY(6px);
+   151→      transition: opacity 0.35s ease, transform 0.35s ease;
+   152→    }
+   153→    .term-line.is-shown {
+   154→      opacity: 1;
+   155→      transform: translateY(0);
+   156→    }
+   157→
+   158→    .glass-nav {
+   159→      background: rgba(15, 23, 42, 0.72);
+   160→      backdrop-filter: blur(12px);
+   161→      -webkit-backdrop-filter: blur(12px);
+   162→    }
+   163→
+   164→    @media (prefers-reduced-motion: reduce) {
+   165→      .status-dot, .cursor-blink::after { animation: none; }
+   166→      .fade-up, .term-line {
+   167→        opacity: 1;
+   168→        transform: none;
+   169→        transition: none;
+   170→      }
+   171→      .card-hover:hover, .metric-card:hover { transform: none; }
+   172→    }
+   173→  </style>
+   174→</head>
+   175→<body class="bg-main text-primary antialiased">
+   176→
+   177→  <!-- NAV -->
+   178→  <header data-od-id="nav" class="glass-nav sticky top-0 z-50 border-b border-edge">
+   179→    <div class="mx-auto flex max-w-content items-center justify-between gap-4 px-4 py-3 sm:px-6">
+   180→      <div class="flex items-center gap-2 font-mono text-xs sm:text-sm" data-od-id="status-online">
+   181→        <span class="status-dot inline-block h-2 w-2 rounded-full bg-emerald" aria-hidden="true"></span>
+   182→        <span class="text-emerald">[● SYSTEM_ONLINE]</span>
+   183→      </div>
+   184→
+   185→      <nav class="hidden items-center gap-5 font-mono text-xs md:flex lg:gap-6 lg:text-sm" aria-label="Primary">
+   186→        <a href="#about" class="nav-link" data-od-id="nav-about">// 01.ABOUT</a>
+   187→        <a href="#services" class="nav-link" data-od-id="nav-services">// 02.SERVICES</a>
+   188→        <a href="#stack" class="nav-link" data-od-id="nav-stack">// 03.STACK</a>
+   189→        <a href="#process" class="nav-link" data-od-id="nav-process">// 04.PROCESS</a>
+   190→        <a href="#contact" class="nav-link" data-od-id="nav-contact">// 05.CONTACT</a>
+   191→      </nav>
+   192→
+   193→      <div class="flex items-center gap-2">
+   194→        <a href="#contact" class="btn-primary font-mono text-xs px-3 py-2 rounded-lg min-h-[44px] inline-flex items-center" data-od-id="nav-cta">
+   195→          Execute_Call()
+   196→        </a>
+   197→        <button type="button" id="menu-toggle" class="btn-secondary md:hidden rounded-lg p-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center" aria-expanded="false" aria-controls="mobile-menu" data-od-id="nav-menu-toggle">
+   198→          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+   199→            <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/>
+   200→          </svg>
+   201→          <span class="sr-only">Menu</span>
+   202→        </button>
+   203→      </div>
+   204→    </div>
+   205→
+   206→    <div id="mobile-menu" class="hidden border-t border-edge md:hidden backdrop-blur-md bg-main/90" data-od-id="mobile-menu">
+   207→      <nav class="mx-auto flex max-w-content flex-col gap-1 px-4 py-3 font-mono text-sm" aria-label="Mobile">
+   208→        <a href="#about" class="nav-link py-3">// 01.ABOUT</a>
+   209→        <a href="#services" class="nav-link py-3">// 02.SERVICES</a>
+   210→        <a href="#stack" class="nav-link py-3">// 03.STACK</a>
+   211→        <a href="#process" class="nav-link py-3">// 04.PROCESS</a>
+   212→        <a href="#contact" class="nav-link py-3">// 05.CONTACT</a>
+   213→      </nav>
+   214→    </div>
+   215→  </header>
+   216→
+   217→  <main>
+   218→    <!-- HERO -->
+   219→    <section data-od-id="hero" class="border-b border-edge">
+   220→      <div class="mx-auto grid max-w-content gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:py-20">
+   221→        <div class="flex flex-col justify-center fade-up" data-od-id="hero-copy">
+   222→          <p class="font-mono text-xs tracking-wide text-cyan sm:text-sm" data-od-id="hero-tag">
+   223→            // ANALYTICS &amp; AI ARCHITECTURE
+   224→          </p>
+   225→          <h1 class="mt-3 font-mono text-3xl font-semibold leading-tight text-primary sm:text-4xl lg:text-[2.5rem]" data-od-id="hero-title">
+   226→            NUTCHAPONG L.<br class="hidden sm:block" />
+   227→            <span class="text-emerald">(KENDO)</span>
+   228→          </h1>
+   229→          <p class="mt-4 font-mono text-sm leading-relaxed text-muted sm:text-base" data-od-id="hero-role">
+   230→            <span class="text-cyan">const</span> role = <span class="text-emerald">"Data &amp; AI Stack Solutions Consultant"</span>;
+   231→          </p>
+   232→          <p class="mt-2 font-mono text-xs text-muted sm:text-sm">
+   233→            Analytics Engineer
+   234→          </p>
+   235→          <p class="mt-6 max-w-xl font-sans text-base leading-relaxed text-muted sm:text-lg" data-od-id="hero-tagline">
+   236→            Bridging the gap between executive business strategy and modern AI/Data engineering. I turn complex data systems into ROI, automated workflows, and high-impact web apps.
+   237→          </p>
+   238→          <div class="mt-8 flex flex-wrap gap-3" data-od-id="hero-actions">
+   239→            <a href="#contact" class="btn-primary font-mono text-sm px-5 py-3 rounded-lg min-h-[44px] inline-flex items-center">
+   240→              Execute_Call()
+   241→            </a>
+   242→            <a href="#services" class="btn-secondary font-mono text-sm px-5 py-3 rounded-lg min-h-[44px] inline-flex items-center">
+   243→              view --services
+   244→            </a>
+   245→          </div>
+   246→        </div>
+   247→
+   248→        <!-- Terminal card -->
+   249→        <div class="overflow-hidden rounded-lg border border-edge bg-surface/90 backdrop-blur-md shadow-lg shadow-black/30 fade-up" data-delay="2" data-od-id="hero-terminal">
+   250→          <div class="flex items-center gap-2 border-b border-edge px-4 py-3">
+   251→            <span class="h-3 w-3 rounded-full bg-[#FF5F56]" aria-hidden="true"></span>
+   252→            <span class="h-3 w-3 rounded-full bg-[#FFBD2E]" aria-hidden="true"></span>
+   253→            <span class="h-3 w-3 rounded-full bg-[#27C93F]" aria-hidden="true"></span>
+   254→            <span class="ml-3 font-mono text-xs text-muted">kendo@studio — zsh</span>
+   255→          </div>
+   256→          <div class="space-y-3 p-4 font-mono text-xs leading-relaxed sm:p-5 sm:text-sm min-h-[220px]" id="terminal-body" aria-live="polite">
+   257→            <div class="term-line" data-term-step="0">
+   258→              <span class="text-emerald">$</span> <span class="text-primary">whoami</span>
+   259→              <div class="mt-1 text-muted">&gt; Nutchapong L. (KENDO)</div>
+   260→            </div>
+   261→            <div class="term-line" data-term-step="1">
+   262→              <span class="text-emerald">$</span> <span class="text-primary">get --credentials</span>
+   263→              <div class="mt-1 text-muted">&gt; Master’s in Data Analytics (First-Class Honors), NIDA</div>
+   264→              <div class="text-muted">&gt; 8+ years combined · 4 Yrs Business Development + 4+ Yrs Data Analytics/Management</div>
+   265→            </div>
+   266→            <div class="term-line" data-term-step="2">
+   267→              <span class="text-emerald">$</span> <span class="text-primary">get --core-stack</span>
+   268→              <div class="mt-1 text-cyan">&gt; ["Python", "SQL", "HTML", "Power BI", "Looker", "ETL/ELT"]</div>
+   269→            </div>
+   270→            <div class="term-line" data-term-step="3">
+   271→              <span class="text-emerald">$</span> <span class="text-primary">check --status</span>
+   272→              <div class="mt-1 text-muted cursor-blink">&gt; Ready for strategic enterprise deployment...</div>
+   273→            </div>
+   274→          </div>
+   275→        </div>
+   276→      </div>
+   277→    </section>
+   278→
+   279→    <!-- ABOUT & TRACK RECORD -->
+   280→    <section id="about" data-od-id="about" class="border-b border-edge">
+   281→      <div class="mx-auto max-w-content px-4 py-14 sm:px-6 lg:py-20">
+   282→        <div class="fade-up">
+   283→          <p class="font-mono text-xs text-cyan sm:text-sm">// 01.ABOUT &amp; TRACK_RECORD</p>
+   284→          <h2 class="mt-2 font-mono text-2xl font-semibold text-primary sm:text-3xl" data-od-id="about-title">
+   285→            Ground truth, not buzzwords
+   286→          </h2>
+   287→        </div>
+   288→
+   289→        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+   290→          <div class="fade-up" data-od-id="about-bio">
+   291→            <p class="font-sans text-base leading-relaxed text-muted sm:text-lg">
+   292→              Most technical engineers build pipelines without understanding P&amp;L or ROI. Most consultants give advice but can’t write code. I bridge both worlds.
+   293→            </p>
+   294→            <p class="mt-4 font-sans text-base leading-relaxed text-muted sm:text-lg">
+   295→              8+ years combined experience — 4 Yrs Business Development + 4+ Yrs Data Analytics/Management — backed by a Master’s in Data Analytics (First-Class Honors), NIDA.
+   296→            </p>
+   297→            <dl class="mt-6 grid gap-3 font-mono text-sm sm:grid-cols-2">
+   298→              <div class="rounded-lg border border-edge bg-surface px-4 py-3">
+   299→                <dt class="text-xs text-muted">Education</dt>
+   300→                <dd class="mt-1 text-primary">Master’s in Data Analytics · NIDA · First-Class Honors</dd>
+   301→              </div>
+   302→              <div class="rounded-lg border border-edge bg-surface px-4 py-3">
+   303→                <dt class="text-xs text-muted">Experience</dt>
+   304→                <dd class="mt-1 text-primary">8+ years (4 BD + 4+ Data)</dd>
+   305→              </div>
+   306→            </dl>
+   307→          </div>
+   308→
+   309→          <div class="grid gap-4" data-od-id="track-record">
+   310→            <article class="metric-card fade-up rounded-lg border border-edge bg-surface p-5" data-delay="1" data-od-id="metric-cost">
+   311→              <div class="font-mono text-3xl font-semibold text-emerald sm:text-4xl">60%</div>
+   312→              <h3 class="mt-2 font-mono text-sm text-primary">Cost Reduction</h3>
+   313→              <p class="mt-2 font-sans text-sm leading-relaxed text-muted">
+   314→                Cut legacy dashboard and cloud pipeline infrastructure costs by up to 60%.
+   315→              </p>
+   316→            </article>
+   317→            <article class="metric-card fade-up rounded-lg border border-edge bg-surface p-5" data-delay="2" data-od-id="metric-automation">
+   318→              <div class="font-mono text-3xl font-semibold text-cyan sm:text-4xl">40–70%</div>
+   319→              <h3 class="mt-2 font-mono text-sm text-primary">Automation Workload Cut</h3>
+   320→              <p class="mt-2 font-sans text-sm leading-relaxed text-muted">
+   321→                Automated marketing and CRM lead generation workflows, cutting team workload by 40%–70%.
+   322→              </p>
+   323→            </article>
+   324→            <article class="metric-card fade-up rounded-lg border border-edge bg-surface p-5" data-delay="3" data-od-id="metric-revenue">
+   325→              <div class="font-mono text-2xl font-semibold text-emerald sm:text-3xl">Multi-Million THB</div>
+   326→              <h3 class="mt-2 font-mono text-sm text-primary">Revenue Impact</h3>
+   327→              <p class="mt-2 font-sans text-sm leading-relaxed text-muted">
+   328→                Driven multi-million THB sales uplifts in retail categories through Customer Lifetime Value (CLV) and retention modeling.
+   329→              </p>
+   330→            </article>
+   331→          </div>
+   332→        </div>
+   333→      </div>
+   334→    </section>
+   335→
+   336→    <!-- SERVICES & PRICING -->
+   337→    <section id="services" data-od-id="services" class="border-b border-edge">
+   338→      <div class="mx-auto max-w-content px-4 py-14 sm:px-6 lg:py-20">
+   339→        <div class="fade-up">
+   340→          <p class="font-mono text-xs text-cyan sm:text-sm">// 02.SERVICES &amp; PRICING</p>
+   341→          <h2 class="mt-2 font-mono text-2xl font-semibold text-primary sm:text-3xl" data-od-id="services-title">
+   342→            Engagement models
+   343→          </h2>
+   344→          <p class="mt-3 max-w-2xl font-sans text-muted">
+   345→            Strategic Advisory (hourly) or End-to-End Project Execution (fixed / project-based).
+   346→          </p>
+   347→        </div>
+   348→
+   349→        <div class="mt-10 grid gap-6 lg:grid-cols-2">
+   350→          <article class="card-hover fade-up flex flex-col rounded-lg border border-edge bg-surface p-6 sm:p-7" data-delay="1" data-od-id="service-advisory">
+   351→            <div class="flex flex-wrap items-start justify-between gap-3">
+   352→              <div>
+   353→                <p class="font-mono text-xs text-emerald">SERVICE_01</p>
+   354→                <h3 class="mt-1 font-mono text-lg font-semibold text-primary sm:text-xl">
+   355→                  Strategic Advisory &amp; Consultation
+   356→                </h3>
+   357→              </div>
+   358→              <div class="rounded-md border border-emerald/40 bg-main px-3 py-2 text-right font-mono">
+   359→                <div class="text-xs text-muted">Hourly</div>
+   360→                <div class="text-sm text-emerald sm:text-base">1,000 – 1,500 THB</div>
+   361→              </div>
+   362→            </div>
+   363→            <ul class="mt-5 flex-1 space-y-2.5 font-mono text-xs text-muted sm:text-sm">
+   364→              <li class="flex gap-2"><span class="text-emerald shrink-0">▸</span><span>Data &amp; AI Architecture Advisory</span></li>
+   365→              <li class="flex gap-2"><span class="text-emerald shrink-0">▸</span><span>Tooling &amp; Infrastructure Cost-Optimization</span></li>
+   366→              <li class="flex gap-2"><span class="text-emerald shrink-0">▸</span><span>CRM/CLV Analytics Strategy</span></li>
+   367→              <li class="flex gap-2"><span class="text-emerald shrink-0">▸</span><span>Workflow Automation Strategy</span></li>
+   368→            </ul>
+   369→            <a href="#contact" class="btn-secondary mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg px-4 py-2.5 font-mono text-sm">
+   370→              book --advisory
+   371→            </a>
+   372→          </article>
+   373→
+   374→          <article class="card-hover fade-up flex flex-col rounded-lg border border-edge bg-surface p-6 sm:p-7" data-delay="2" data-od-id="service-execution">
+   375→            <div class="flex flex-wrap items-start justify-between gap-3">
+   376→              <div>
+   377→                <p class="font-mono text-xs text-cyan">SERVICE_02</p>
+   378→                <h3 class="mt-1 font-mono text-lg font-semibold text-primary sm:text-xl">
+   379→                  End-to-End Project Execution
+   380→                </h3>
+   381→              </div>
+   382→              <div class="rounded-md border border-cyan/40 bg-main px-3 py-2 text-right font-mono">
+   383→                <div class="text-xs text-muted">Fixed / Project</div>
+   384→                <div class="text-sm text-cyan sm:text-base">Scoped on deliverables</div>
+   385→              </div>
+   386→            </div>
+   387→            <ul class="mt-5 flex-1 space-y-2.5 font-mono text-xs text-muted sm:text-sm">
+   388→              <li class="flex gap-2"><span class="text-cyan shrink-0">▸</span><span><strong class="text-primary font-medium">Custom Web Apps &amp; Automation</strong> — Streamlit, HTML, Internal tools</span></li>
+   389→              <li class="flex gap-2"><span class="text-cyan shrink-0">▸</span><span><strong class="text-primary font-medium">Modern Data Architecture</strong> — SQL, Python, PySpark, Data Marts, SCD Type 2, IAM</span></li>
+   390→              <li class="flex gap-2"><span class="text-cyan shrink-0">▸</span><span><strong class="text-primary font-medium">Analytics &amp; BI</strong> — Power BI Custom DAX, Looker, Revenue tracking</span></li>
+   391→            </ul>
+   392→            <a href="#contact" class="btn-secondary mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg px-4 py-2.5 font-mono text-sm">
+   393→              scope --project
+   394→            </a>
+   395→          </article>
+   396→        </div>
+   397→      </div>
+   398→    </section>
+   399→
+   400→    <!-- TECH STACK MATRIX -->
+   401→    <section id="stack" data-od-id="stack" class="border-b border-edge">
+   402→      <div class="mx-auto max-w-content px-4 py-14 sm:px-6 lg:py-20">
+   403→        <div class="fade-up">
+   404→          <p class="font-mono text-xs text-cyan sm:text-sm">// 03.TECH_STACK_MATRIX</p>
+   405→          <h2 class="mt-2 font-mono text-2xl font-semibold text-primary sm:text-3xl" data-od-id="stack-title">
+   406→            Capabilities matrix
+   407→          </h2>
+   408→        </div>
+   409→
+   410→        <div class="mt-10 grid gap-5 md:grid-cols-3">
+   411→          <article class="card-hover fade-up rounded-lg border border-edge bg-surface p-5 sm:p-6" data-delay="1" data-od-id="stack-languages">
+   412→            <div class="flex items-center gap-2 border-b border-edge pb-3">
+   413→              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.75" aria-hidden="true">
+   414→                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+   415→              </svg>
+   416→              <h3 class="font-mono text-sm font-semibold text-primary">Languages</h3>
+   417→            </div>
+   418→            <ul class="mt-4 space-y-2.5 font-mono text-xs text-muted sm:text-sm">
+   419→              <li class="flex justify-between gap-2 border-b border-edge/60 pb-2"><span>Python</span><span class="text-emerald">core</span></li>
+   420→              <li class="flex justify-between gap-2 border-b border-edge/60 pb-2"><span>SQL</span><span class="text-emerald">core</span></li>
+   421→              <li class="flex justify-between gap-2"><span>HTML</span><span class="text-emerald">web apps</span></li>
+   422→            </ul>
+   423→          </article>
+   424→
+   425→          <article class="card-hover fade-up rounded-lg border border-edge bg-surface p-5 sm:p-6" data-delay="2" data-od-id="stack-analytics">
+   426→            <div class="flex items-center gap-2 border-b border-edge pb-3">
+   427→              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.75" aria-hidden="true">
+   428→                <path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/>
+   429→              </svg>
+   430→              <h3 class="font-mono text-sm font-semibold text-primary">Analytics</h3>
+   431→            </div>
+   432→            <ul class="mt-4 space-y-2.5 font-mono text-xs text-muted sm:text-sm">
+   433→              <li class="flex justify-between gap-2 border-b border-edge/60 pb-2"><span>Power BI</span><span class="text-cyan">Custom DAX</span></li>
+   434→              <li class="flex justify-between gap-2 border-b border-edge/60 pb-2"><span>Looker</span><span class="text-cyan">BI</span></li>
+   435→              <li class="flex justify-between gap-2 border-b border-edge/60 pb-2"><span>CLV</span><span class="text-cyan">lifetime value</span></li>
+   436→              <li class="flex justify-between gap-2"><span>RFM</span><span class="text-cyan">segmentation</span></li>
+   437→            </ul>
+   438→          </article>
+   439→
+   440→          <article class="card-hover fade-up rounded-lg border border-edge bg-surface p-5 sm:p-6" data-delay="3" data-od-id="stack-data-eng">
+   441→            <div class="flex items-center gap-2 border-b border-edge pb-3">
+   442→              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.75" aria-hidden="true">
+   443→                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+   444→              </svg>
+   445→              <h3 class="font-mono text-sm font-semibold text-primary">Engineering</h3>
+   446→            </div>
+   447→            <ul class="mt-4 space-y-2.5 font-mono text-xs text-muted sm:text-sm">
+   448→              <li class="flex justify-between gap-2 border-b border-edge/60 pb-2"><span>Data Pipelines</span><span class="text-emerald">ETL / ELT</span></li>
+   449→              <li class="flex justify-between gap-2 border-b border-edge/60 pb-2"><span>ETL/ELT</span><span class="text-emerald">ingestion</span></li>
+   450→              <li class="flex justify-between gap-2"><span>Cloud Cost Optimization</span><span class="text-emerald">infra</span></li>
+   451→            </ul>
+   452→          </article>
+   453→        </div>
+   454→      </div>
+   455→    </section>
+   456→
+   457→    <!-- HOW WE WORK -->
+   458→    <section id="process" data-od-id="process" class="border-b border-edge">
+   459→      <div class="mx-auto max-w-content px-4 py-14 sm:px-6 lg:py-20">
+   460→        <div class="fade-up">
+   461→          <p class="font-mono text-xs text-cyan sm:text-sm">// 04.WORKING_PROCESS</p>
+   462→          <h2 class="mt-2 font-mono text-2xl font-semibold text-primary sm:text-3xl" data-od-id="process-title">
+   463→            How we work
+   464→          </h2>
+   465→        </div>
+   466→
+   467→        <ol class="mt-10 grid gap-5 md:grid-cols-3">
+   468→          <li class="card-hover fade-up relative rounded-lg border border-edge bg-surface p-6" data-delay="1" data-od-id="step-1">
+   469→            <div class="step-num flex h-10 w-10 items-center justify-center rounded-lg border border-edge bg-main font-mono text-sm font-semibold text-emerald">
+   470→              01
+   471→            </div>
+   472→            <h3 class="mt-4 font-mono text-base font-semibold text-primary">Send a Message</h3>
+   473→            <p class="mt-2 font-sans text-sm leading-relaxed text-muted">
+   474→              Share current bottleneck or business goal.
+   475→            </p>
+   476→            <p class="mt-4 font-mono text-xs text-cyan">$ ping --contact</p>
+   477→          </li>
+   478→          <li class="card-hover fade-up relative rounded-lg border border-edge bg-surface p-6" data-delay="2" data-od-id="step-2">
+   479→            <div class="step-num flex h-10 w-10 items-center justify-center rounded-lg border border-edge bg-main font-mono text-sm font-semibold text-emerald">
+   480→              02
+   481→            </div>
+   482→            <h3 class="mt-4 font-mono text-base font-semibold text-primary">Initial Consult</h3>
+   483→            <p class="mt-2 font-sans text-sm leading-relaxed text-muted">
+   484→              Discovery call to map out exact scope.
+   485→            </p>
+   486→            <p class="mt-4 font-mono text-xs text-cyan">$ consult --scope</p>
+   487→          </li>
+   488→          <li class="card-hover fade-up relative rounded-lg border border-edge bg-surface p-6" data-delay="3" data-od-id="step-3">
+   489→            <div class="step-num flex h-10 w-10 items-center justify-center rounded-lg border border-edge bg-main font-mono text-sm font-semibold text-emerald">
+   490→              03
+   491→            </div>
+   492→            <h3 class="mt-4 font-mono text-base font-semibold text-primary">Execution &amp; Delivery</h3>
+   493→            <p class="mt-2 font-sans text-sm leading-relaxed text-muted">
+   494→              Receive milestones, clean code, and business deliverables.
+   495→            </p>
+   496→            <p class="mt-4 font-mono text-xs text-cyan">$ ship --deliverables</p>
+   497→          </li>
+   498→        </ol>
+   499→      </div>
+   500→    </section>
+   501→
+   502→    <!-- CONTACT -->
+   503→    <section id="contact" data-od-id="contact" class="border-b border-edge">
+   504→      <div class="mx-auto max-w-content px-4 py-14 sm:px-6 lg:py-20">
+   505→        <div class="fade-up">
+   506→          <p class="font-mono text-xs text-cyan sm:text-sm">// 05.CONTACT_TERMINAL</p>
+   507→          <h2 class="mt-2 font-mono text-2xl font-semibold text-primary sm:text-3xl" data-od-id="contact-title">
+   508→            Open a channel
+   509→          </h2>
+   510→          <p class="mt-3 max-w-2xl font-sans text-muted">
+   511→            Terminal ping · email · LinkedIn
+   512→          </p>
+   513→        </div>
+   514→
+   515→        <div class="mt-8 overflow-hidden rounded-lg border border-edge bg-surface/90 backdrop-blur-md shadow-lg shadow-black/20 fade-up" data-delay="1" data-od-id="contact-terminal">
+   516→          <div class="flex items-center gap-2 border-b border-edge px-4 py-3">
+   517→            <span class="h-3 w-3 rounded-full bg-[#FF5F56]" aria-hidden="true"></span>
+   518→            <span class="h-3 w-3 rounded-full bg-[#FFBD2E]" aria-hidden="true"></span>
+   519→            <span class="h-3 w-3 rounded-full bg-[#27C93F]" aria-hidden="true"></span>
+   520→            <span class="ml-3 font-mono text-xs text-muted">contact@kendo — session</span>
+   521→          </div>
+   522→          <div class="space-y-5 p-5 font-mono text-sm sm:p-6">
+   523→            <div>
+   524→              <div class="text-muted">$ ping --email</div>
+   525→              <div class="mt-2 flex flex-wrap items-center gap-3">
+   526→                <code class="text-primary break-all" id="email-value">nut_bcd@windowslive.com</code>
+   527→                <button type="button" id="copy-email" class="btn-secondary rounded-lg px-3 py-2 text-xs min-h-[44px]" data-od-id="copy-email">
+   528→                  Copy
+   529→                </button>
+   530→                <a href="mailto:nut_bcd@windowslive.com" class="btn-primary rounded-lg px-3 py-2 text-xs min-h-[44px] inline-flex items-center" data-od-id="mailto">
+   531→                  mailto()
+   532→                </a>
+   533→              </div>
+   534→            </div>
+   535→            <div>
+   536→              <div class="text-muted">$ open --linkedin</div>
+   537→              <div class="mt-2">
+   538→                <a href="https://www.linkedin.com/in/nutchapong-lertsithikarnkosol-5b2534198/" target="_blank" rel="noopener noreferrer" class="text-cyan underline-offset-4 hover:underline break-all" data-od-id="linkedin-link">
+   539→                  https://www.linkedin.com/in/nutchapong-lertsithikarnkosol
+   540→                </a>
+   541→              </div>
+   542→            </div>
+   543→            <div class="border-t border-edge pt-4 text-xs text-muted cursor-blink">
+   544→              $ awaiting input — systems operational
+   545→            </div>
+   546→          </div>
+   547→        </div>
+   548→      </div>
+   549→    </section>
+   550→  </main>
+   551→
+   552→  <footer data-od-id="footer" class="border-t border-edge">
+   553→    <div class="mx-auto flex max-w-content flex-col gap-2 px-4 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+   554→      <p class="font-mono text-xs text-muted sm:text-sm">
+   555→        © 2026 NUTCHAPONG L. All systems operational.
+   556→      </p>
+   557→      <p class="font-mono text-xs text-muted">
+   558→        <span class="text-emerald">●</span> Theme 04 · Terminal Elegance
+   559→      </p>
+   560→    </div>
+   561→  </footer>
+   562→
+   563→  <script>
+   564→    (function () {
+   565→      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+   566→
+   567→      var toggle = document.getElementById('menu-toggle');
+   568→      var menu = document.getElementById('mobile-menu');
+   569→      if (toggle && menu) {
+   570→        toggle.addEventListener('click', function () {
+   571→          var open = menu.classList.toggle('hidden') === false;
+   572→          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+   573→        });
+   574→        menu.querySelectorAll('a').forEach(function (a) {
+   575→          a.addEventListener('click', function () {
+   576→            menu.classList.add('hidden');
+   577→            toggle.setAttribute('aria-expanded', 'false');
+   578→          });
+   579→        });
+   580→      }
+   581→
+   582→      var copyBtn = document.getElementById('copy-email');
+   583→      var emailEl = document.getElementById('email-value');
+   584→      if (copyBtn && emailEl) {
+   585→        copyBtn.addEventListener('click', function () {
+   586→          var text = emailEl.textContent.trim();
+   587→          function done() {
+   588→            var prev = copyBtn.textContent;
+   589→            copyBtn.textContent = 'Copied';
+   590→            copyBtn.classList.add('copy-ok');
+   591→            setTimeout(function () {
+   592→              copyBtn.textContent = prev;
+   593→              copyBtn.classList.remove('copy-ok');
+   594→            }, 1800);
+   595→          }
+   596→          if (navigator.clipboard && navigator.clipboard.writeText) {
+   597→            navigator.clipboard.writeText(text).then(done).catch(function () {
+   598→              fallbackCopy(text, done);
+   599→            });
+   600→          } else {
+   601→            fallbackCopy(text, done);
+   602→          }
+   603→        });
+   604→      }
+   605→
+   606→      function fallbackCopy(text, cb) {
+   607→        var ta = document.createElement('textarea');
+   608→        ta.value = text;
+   609→        ta.setAttribute('readonly', '');
+   610→        ta.style.position = 'fixed';
+   611→        ta.style.left = '-9999px';
+   612→        document.body.appendChild(ta);
+   613→        ta.select();
+   614→        try { document.execCommand('copy'); cb(); } catch (e) {}
+   615→        document.body.removeChild(ta);
+   616→      }
+   617→
+   618→      /* Staggered terminal line reveal */
+   619→      var termLines = document.querySelectorAll('.term-line');
+   620→      if (reduceMotion) {
+   621→        termLines.forEach(function (el) { el.classList.add('is-shown'); });
+   622→      } else {
+   623→        termLines.forEach(function (el, i) {
+   624→          setTimeout(function () {
+   625→            el.classList.add('is-shown');
+   626→          }, 280 + i * 420);
+   627→        });
+   628→      }
+   629→
+   630→      /* IntersectionObserver fade-up on sections + cards */
+   631→      var revealEls = document.querySelectorAll('.fade-up');
+   632→      if (reduceMotion) {
+   633→        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+   634→      } else if ('IntersectionObserver' in window) {
+   635→        var observer = new IntersectionObserver(function (entries, obs) {
+   636→          entries.forEach(function (entry) {
+   637→            if (entry.isIntersecting) {
+   638→              entry.target.classList.add('is-visible');
+   639→              obs.unobserve(entry.target);
+   640→            }
+   641→          });
+   642→        }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+   643→
+   644→        revealEls.forEach(function (el) { observer.observe(el); });
+   645→      } else {
+   646→        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+   647→      }
+   648→    })();
+   649→  </script>
+   650→</body>
+   651→</html>
+   652→
